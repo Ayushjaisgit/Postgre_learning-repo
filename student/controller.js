@@ -47,7 +47,7 @@ const bookCabsToLocation = async (req, res) =>{
     if(!response){
         res.status(400).send("Something Went Wrong");
     }
-    const bookingResponse =  await pool.query("SELECT customer.*, ride_info.*, fare_location_list.travelfrom,fare_location_list.travelto,fare_location_list.onewayfare, bookings_creds.cust_id, bookings_creds.rider_id, bookings_creds.booking_details FROM bookings_creds LEFT JOIN customer ON bookings_creds.cust_id = customer.id LEFT JOIN ride_info ON bookings_creds.rider_id = ride_info.id LEFT JOIN fare_location_list ON bookings_creds.booking_details = fare_location_list.id WHERE cust_id = $1", [customerId]);
+    const bookingResponse =  await pool.query("SELECT customer.*, ride_info.*, fare_location_list.travelfrom,fare_location_list.travelto,fare_location_list.onewayfare, bookings_creds.cust_id, bookings_creds.rider_id, bookings_creds.booking_details FROM bookings_creds LEFT JOIN customer ON bookings_creds.cust_id = customer.id LEFT JOIN ride_info ON bookings_creds.rider_id = ride_info.id LEFT JOIN fare_location_list ON bookings_creds.booking_details = fare_location_list.id WHERE cust_id = $1 ORDER BY bookings_creds.id DESC LIMIT 1", [customerId]);
 
     res.status(200).send(bookingResponse.rows);
 }
