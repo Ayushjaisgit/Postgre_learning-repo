@@ -10,6 +10,6 @@ app.get('/', (req, res) =>{
 })
 
 
-app.use('/after' , students)
+app.use('/api/v1' , students)
 
 app.listen(port,() => console.log(`app listening on port ${port}`))
